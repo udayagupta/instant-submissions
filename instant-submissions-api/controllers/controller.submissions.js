@@ -16,7 +16,7 @@ exports.createSubmission = async (req, res) => {
 
         const io = req.app.get("io");
 
-        io.emit(`new-submission-${formId}`, newSubmission);s
+        io.emit(`new-submission-${formId}`, newSubmission);
 
         res.status(200).json({ message: "Form data saved!" })
 
@@ -29,9 +29,8 @@ exports.createSubmission = async (req, res) => {
 
 exports.getSubmissions = async (req, res) => {
     const formId = req.params.formId;
-    const data = req.body;
 
-    if (!data || !formId) return res.status(400).json({ message: "Form Id or Data is mission!" });
+    if (!formId) return res.status(400).json({ message: "Form Id or Data is mission!" });
 
     try {
         const submissions = await Submission.find({ formId }).sort("-createdAt");
