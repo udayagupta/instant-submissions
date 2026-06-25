@@ -6,6 +6,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const submissionRoutes = require("./routes/submission.routes");
 const { createSubmission } = require("./controllers/controller.submissions");
+const formRoutes = require("./routes/forms.routes");
 
 
 const app = express();
@@ -22,8 +23,9 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
-app.use("/api", submissionRoutes);
 
+app.use("/api", submissionRoutes);
+app.use("/api", formRoutes);
 
 server.listen(process.env.PORT || 5000, () => {
     console.log(`Server running on ${process.env.PORT || 5000}`)
