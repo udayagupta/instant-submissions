@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const FormCard = ({ form }) => {
   const [copied, setCopied] = useState(false);
@@ -8,20 +9,18 @@ export const FormCard = ({ form }) => {
   const API_BASE_URL = "http://localhost:5000/api";
 
   const handleCopy = (e) => {
-    // Prevents the click from triggering the main card's onClick (if you add one later)
     e.stopPropagation();
 
     if (form._id) {
       navigator.clipboard.writeText(form._id);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
   const handleCopySnippet = (e) => {
     e.stopPropagation();
     if (form._id) {
-      // The HTML snippet with the correct action and method
       const htmlSnippet = `<form action="${API_BASE_URL}/submit/${form._id}" method="POST">
   <input type="text" name="email" placeholder="Enter your email" required />
   <button type="submit">Submit</button>
@@ -51,13 +50,13 @@ export const FormCard = ({ form }) => {
 
         {/* Submissions Count Indicator */}
         <div className="flex flex-col items-end shrink-0">
-          <span className="text-text-faint font-mono text-[10px] uppercase tracking-wider mb-1">
+          <span className="text-text-faint font-mono text-[12px] uppercase tracking-wider mb-1">
             Submissions
           </span>
           <div className="pill pill-fresh flex items-center gap-2">
             <span className="live-dot"></span>
             <span className="font-mono font-bold text-[14px] text-accent-50">
-              {form.count || 0}
+              {form.submissionCount || 0}
             </span>
           </div>
         </div>
@@ -118,9 +117,16 @@ export const FormCard = ({ form }) => {
           </button>
         </div>
 
-        <span className="text-accent text-sm font-medium hover:text-accent-50 transition-colors">
+        {/* <a href={`/submissions/${form._id}`} className="text-accent text-sm font-medium hover:text-accent-50 transition-colors">
           View Submissions &rarr;
-        </span>
+        </a> */}
+        <Link
+          to={`/submissions/${form._id}`}
+          state={{ formName: form.name }}
+          className="text-accent text-sm font-medium hover:text-accent-50 transition-colors"
+        >
+          <span>View Submissions &rarr;</span>
+        </Link>
       </div>
 
     </div>
