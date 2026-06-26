@@ -4,6 +4,7 @@ export const FormCard = ({ form }) => {
   const [copied, setCopied] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState(false);
 
+
   const API_BASE_URL = "http://localhost:5000/api";
 
   const handleCopy = (e) => {
@@ -64,10 +65,8 @@ export const FormCard = ({ form }) => {
       </div>
 
       {/* Bottom Section: Footer/Action */}
-      {/* Bottom Section: Footer/Action */}
       <div className="border-t border-line pt-3 mt-1 flex justify-between items-center">
 
-        {/* Properly Styled Copy Button */}
         <div className='flex gap-2'>
           <button
             onClick={handleCopy}
