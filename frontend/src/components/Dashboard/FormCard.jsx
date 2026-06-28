@@ -5,7 +5,7 @@ export const FormCard = ({ form }) => {
   const [copied, setCopied] = useState(false);
   const [copiedSnippet, setCopiedSnippet] = useState(false);
 
-
+  console.log("FormCard", form.name);
   const API_BASE_URL = "http://localhost:5000/api";
 
   const handleCopy = (e) => {

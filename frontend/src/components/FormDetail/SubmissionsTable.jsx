@@ -6,10 +6,12 @@ const SubmissionsTable = ({ submissions }) => {
   const location = useLocation()
   const formName = location.state?.formName
 
+  console.log(formName);
+
   if (submissions.length === 0) {
     return (
       <p className='text-center text-text-dim text-[18px] py-10'>
-        No submissions for this form yet!
+        No submissions for <span className='font-semibold text-accent-100'>{formName}</span> form yet!
       </p>
     )
   }
@@ -22,7 +24,7 @@ const SubmissionsTable = ({ submissions }) => {
   return (
     <div className='p-2 rounded-md flex flex-col gap-4'>
       <div className='text-center'>
-        <h2 className='text-text text-xl font-semibold capitalize'>{formName}</h2>
+        <h2 className='text-text text-xl font-semibold capitalize'>{formName || "Submissions"}</h2>
       </div>
 
       <div className='table-wrapper rounded-lg border border-line overflow-x-auto panel'>
